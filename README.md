@@ -7,7 +7,7 @@
 
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Get Docs up and running for your app in seconds.
 
 ## Installation
 
@@ -25,9 +25,17 @@ php artisan vendor:publish --tag="docs-panel-views"
 
 ## Usage
 
-```php
-$docsPanel = new AbdelElrafa\DocsPanel();
-echo $docsPanel->echoPhrase('Hello, AbdelElrafa!');
+Simply put .md files in your `resources/docs` directory and you're good to go.
+
+You can control the title, slug, group and order of your docs by adding a front matter to the top of your .md files. They are optional and have sensible defaults.
+
+```MD
+---
+title: Artisan Console
+slug: artisan
+group: Digging Deeper
+order: 1
+---
 ```
 
 ## Testing
