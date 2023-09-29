@@ -1,31 +1,32 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "abdelelrafa/docs-panel",
+    "description": "A Filament Panel for your applications public documentation.",
     "keywords": [
-        ":vendor_name",
+        "abdelelrafa",
         "laravel",
-        ":package_slug"
+        "docs-panel"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/abdelelrafa/docs-panel",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/abdelelrafa/docs-panel/issues",
+        "source": "https://github.com/abdelelrafa/docs-panel"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Abdel Elrafa",
+            "email": "AbdelElrafa@users.noreply.github.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "filament/filament": "^3.0",
-        "filament/forms": "^3.0",
-        "filament/tables": "^3.0",
+        "filament/filament": "^3.0.54",
+        "illuminate/contracts": "^10.0",
+        "spatie/laravel-markdown": "^2.4",
         "spatie/laravel-package-tools": "^1.15.0",
-        "illuminate/contracts": "^10.0"
+        "spatie/once": "*",
+        "spatie/yaml-front-matter": "*"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -42,13 +43,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "AbdelElrafa\\DocsPanel\\": "src/",
+            "AbdelElrafa\\DocsPanel\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "AbdelElrafa\\DocsPanel\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -68,10 +69,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "AbdelElrafa\\DocsPanel\\DocsPanelServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "DocsPanel": "AbdelElrafa\\DocsPanel\\Facades\\DocsPanel"
             }
         }
     },
