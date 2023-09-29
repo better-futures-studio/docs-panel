@@ -3,8 +3,6 @@
 namespace AbdelElrafa\DocsPanel;
 
 use AbdelElrafa\DocsPanel\Pages\DocsPages;
-use App\Http\Middleware\EncryptCookies;
-use App\Http\Middleware\VerifyCsrfToken;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -14,6 +12,8 @@ use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
@@ -82,8 +82,8 @@ class DocsPanelServiceProvider extends PackageServiceProvider
                 // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
-                EncryptCookies::class, /** @phpstan-ignore-line */
-                VerifyCsrfToken::class, /** @phpstan-ignore-line */
+                EncryptCookies::class,
+                VerifyCsrfToken::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
                 AuthenticateSession::class,
