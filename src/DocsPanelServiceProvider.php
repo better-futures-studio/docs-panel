@@ -48,14 +48,14 @@ class DocsPanelServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        Filament::registerPanel(
-            $this->panel(Panel::make()),
-        );
+        //
     }
 
     public function packageBooted(): void
     {
-        //
+        Filament::registerPanel(
+            $this->panel(Panel::make()),
+        );
     }
 
     protected function getAssetPackageName(): ?string
