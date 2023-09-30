@@ -44,10 +44,23 @@ class DocsPages extends Page
 
     public static function routes(Panel $panel): void
     {
-        $files = static::getDocs();
+
+        $files = collect(static::getDocs())
+            ->sortBy('title')
+            ->sortBy('order')
+            ->groupBy('group')
+            ->sortKeys()
+            ->sortBy(fn ($docs, $group) => ($order = array_search($group, DocsPanelServiceProvider::$groupsOrder)) !== false ? $order : PHP_INT_MAX)
+            ->flatten(1);
+
+        // Register the root route to redirect to the first page.
+        Route::get('/', fn () => redirect()->route("filament.{$panel->getId()}.pages.{$files->first()['slug']}"))
+            ->middleware(static::getRouteMiddleware($panel))
+            ->withoutMiddleware(static::getWithoutRouteMiddleware($panel))
+            ->name('index');
 
         foreach ($files as $file) {
-            $routePath = $file['route_path'];
+            $routePath = $file['slug'];
 
             Route::get("/{$routePath}", static::class)
                 ->middleware(static::getRouteMiddleware($panel))
@@ -57,7 +70,7 @@ class DocsPages extends Page
     }
 
     /**
-     * @return array<array{path: string, route_path: string, slug: string, group: string, order: int, title: string, content: string}>
+     * @return array<array{path: string, slug: string, group: string, order: int, title: string, content: string}>
      */
     public static function getDocs(): array
     {
@@ -89,8 +102,7 @@ class DocsPages extends Page
 
                 $docs[] = [
                     'path' => $file->getRelativePathname(),
-                    'route_path' => str_replace(['index.md', '.md'], '', $file->getRelativePathname()),
-                    'slug' => $object->matter('slug') ?: str_replace(['index.md', '.md'], '', $file->getRelativePathname()) ?: 'index',
+                    'slug' => $object->matter('slug') ?: Str::of($file->getRelativePathname())->replace(['index.md', '.md'], '')->afterLast(DIRECTORY_SEPARATOR) ?: 'index',
                     'group' => $object->matter('group') ?: (Str::contains($file->getRelativePathname(), '/') ? Str::of($file->getRelativePathname())->before('/')->headline() : ''),
                     'order' => $object->matter('order') ?: 0,
                     'title' => $title ?: 'Get Started',

@@ -30,7 +30,7 @@ class DocsPanelServiceProvider extends PackageServiceProvider
     /**
      * @var array<int, string>
      */
-    protected static $groupsOrder = [];
+    public static $groupsOrder = [];
 
     /**
      * @var array<\Closure>
@@ -110,7 +110,7 @@ class DocsPanelServiceProvider extends PackageServiceProvider
                     ->each(function ($docs, $group) use (&$navigationGroups, $panel) {
                         $navigationItems = [];
                         foreach ($docs as $file) {
-                            $routePath = rtrim(filament()->getPanel(self::$name)->getPath(), '/') . '/' . $file['route_path'];
+                            $routePath = rtrim(filament()->getPanel(self::$name)->getPath(), '/') . '/' . $file['slug'];
 
                             if (empty($routeIsActive)) {
                                 $routeIsActive = request()->routeIs("filament.{$panel}.pages.{$file['slug']}");
