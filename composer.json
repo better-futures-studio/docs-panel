@@ -70,10 +70,7 @@
         "laravel": {
             "providers": [
                 "AbdelElrafa\\DocsPanel\\DocsPanelServiceProvider"
-            ],
-            "aliases": {
-                "DocsPanel": "AbdelElrafa\\DocsPanel\\Facades\\DocsPanel"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
