@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -36,6 +37,8 @@ class DocsPanelServiceProvider extends PackageServiceProvider
      * @var array<\Closure>
      */
     protected static $modifyPanelUsing = [];
+
+    protected static bool $enableThemeSelector = true;
 
     public function configurePackage(Package $package): void
     {
@@ -71,15 +74,8 @@ class DocsPanelServiceProvider extends PackageServiceProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
-            // ->discoverResources(in: app_path('Filament/Docs/Resources'), for: 'App\\Filament\\Docs\\Resources')
-            // ->discoverPages(in: app_path('Filament/Docs/Pages'), for: 'App\\Filament\\Docs\\Pages')
             ->pages([
                 DocsPages::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Docs/Widgets'), for: 'App\\Filament\\Docs\\Widgets')
-            ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -92,10 +88,6 @@ class DocsPanelServiceProvider extends PackageServiceProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                // Authenticate::class,
-            ])
-            // ->renderHook('panels::topbar.end', fn () => Blade::render('<x-filament-panels::theme-switcher />'))
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 $docs = DocsPages::getDocs();
                 $navigationGroups = [];
@@ -141,6 +133,10 @@ class DocsPanelServiceProvider extends PackageServiceProvider
             $panel = $modifyPanelUsing($panel);
         }
 
+        if (self::$enableThemeSelector && ($panel->hasDarkMode() && ! $panel->hasDarkModeForced())) {
+            $panel->renderHook('panels::topbar.end', fn () => Blade::render('<x-filament-panels::theme-switcher />'));
+        }
+
         return $panel;
     }
 
@@ -155,5 +151,10 @@ class DocsPanelServiceProvider extends PackageServiceProvider
     public static function modifyPanelUsing(\Closure $closure): void
     {
         self::$modifyPanelUsing[] = $closure;
+    }
+
+    public static function disableThemeSelector(): void
+    {
+        self::$enableThemeSelector = false;
     }
 }
