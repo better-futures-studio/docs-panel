@@ -6,9 +6,6 @@ use BetterFuturesStudio\DocsPanel\Pages\DocsPages;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -87,45 +84,7 @@ class DocsPanelServiceProvider extends PackageServiceProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])
-            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
-                $docs = DocsPages::getDocs();
-                $navigationGroups = [];
-                $panel = filament()->getPanel(self::$name)->getId();
-
-                collect($docs)
-                    ->sortBy('title')
-                    ->sortBy('order')
-                    ->groupBy('group')
-                    ->sortKeys()
-                    ->sortBy(fn ($docs, $group) => ($order = array_search($group, self::$groupsOrder)) !== false ? $order : PHP_INT_MAX)
-                    ->each(function ($docs, $group) use (&$navigationGroups, $panel) {
-                        $navigationItems = [];
-                        foreach ($docs as $file) {
-                            $routePath = rtrim(filament()->getPanel(self::$name)->getPath(), '/') . '/' . $file['slug'];
-
-                            if (empty($routeIsActive)) {
-                                $routeIsActive = request()->routeIs("filament.{$panel}.pages.{$file['slug']}");
-                            }
-
-                            $navigationItems[] = NavigationItem::make($file['title'])
-                                ->group($group)
-                                ->isActiveWhen(fn (): bool => request()->routeIs("filament.{$panel}.pages.{$file['slug']}"))
-                                ->sort(DocsPages::getNavigationSort())
-                                ->badge(DocsPages::getNavigationBadge(), color: DocsPages::getNavigationBadgeColor())
-                                ->url("{$routePath}");
-                        }
-                        if (empty($navigationItems)) {
-                            return;
-                        }
-                        $navigationGroups[] = NavigationGroup::make($group)
-                            ->collapsed(! $routeIsActive)
-                            ->collapsible()
-                            ->items($navigationItems);
-                    });
-
-                return $builder->groups($navigationGroups);
-            });
+            ]);
 
         $panel->renderHook('panels::topbar.end', fn () => self::$enableThemeSelector && ($panel->hasDarkMode() && ! $panel->hasDarkModeForced()) ? Blade::render('<x-filament-panels::theme-switcher />') : '');
 
