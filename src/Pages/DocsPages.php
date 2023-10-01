@@ -3,6 +3,8 @@
 namespace BetterFuturesStudio\DocsPanel\Pages;
 
 use BetterFuturesStudio\DocsPanel\DocsPanelServiceProvider;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Page;
 use Filament\Panel;
 use Illuminate\Contracts\Support\Htmlable;
@@ -42,7 +44,6 @@ class DocsPages extends Page
 
     public static function routes(Panel $panel): void
     {
-
         $files = collect(static::getDocs())
             ->sortBy('title')
             ->sortBy('order')
@@ -94,10 +95,19 @@ class DocsPages extends Page
 
                 $docs[] = [
                     'path' => $file->getRelativePathname(),
-                    'slug' => $object->matter('slug') ?: Str::of($file->getRelativePathname())->replace(['index.md', '.md'], '')->afterLast(DIRECTORY_SEPARATOR) ?: 'index',
-                    'group' => $object->matter('group') ?: (Str::contains($file->getRelativePathname(), '/') ? Str::of($file->getRelativePathname())->before('/')->headline() : ''),
-                    'order' => $object->matter('order') ?: PHP_INT_MAX,
-                    'title' => $title ?: 'Get Started',
+                    'slug' => $object->matter('slug')
+                        ?: Str::of($file->getRelativePathname())->replace(['index.md', '.md'], '')->afterLast(DIRECTORY_SEPARATOR)
+                        ?: 'index',
+                    'group' => $object->matter('group')
+                        ?: (
+                            Str::contains($file->getRelativePathname(), DIRECTORY_SEPARATOR)
+                            ? Str::of($file->getRelativePathname())->before(DIRECTORY_SEPARATOR)->headline()
+                            : ''
+                        ),
+                    'order' => $object->matter('order')
+                        ?: PHP_INT_MAX,
+                    'title' => $title
+                        ?: 'Get Started',
                     'content' => $object->body(),
                 ];
             }
@@ -106,7 +116,7 @@ class DocsPages extends Page
         });
     }
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         $panelName = DocsPanelServiceProvider::$name;
         foreach (static::getDocs() as $file) {
@@ -116,5 +126,42 @@ class DocsPages extends Page
         }
 
         return 'Docs';
+    }
+
+    public static function getNavigationItems(): array
+    {
+        $docs = DocsPages::getDocs();
+        $navigationItems = [];
+        $panelId = ($panel = filament()->getCurrentPanel())->getId();
+
+        $navigationGroups = [];
+        foreach ($docs as $doc) {
+            $navigationGroups[strval($doc['group'])] = $navigationGroups[strval($doc['group'])] ?? request()->routeIs("filament.{$panelId}.pages.{$doc['slug']}");
+        }
+        $navigationGroups = collect($navigationGroups)
+            ->sortKeys()
+            ->sortBy(fn ($docs, $group) => ($order = array_search($group, DocsPanelServiceProvider::$groupsOrder)) !== false ? $order : PHP_INT_MAX)
+            ->toArray();
+        foreach ($navigationGroups as $group => $routeIsActive) {
+            $groupsToRegister[] = NavigationGroup::make($group)
+                ->collapsed(! $routeIsActive)
+                ->collapsible();
+        }
+
+        $panel->navigationGroups($groupsToRegister ?? []);
+
+        collect($docs)
+            ->sortBy('title')
+            ->sortBy('order')
+            ->each(function ($file) use (&$navigationItems, $panelId) {
+                $navigationItems[] = NavigationItem::make($file['title'])
+                    ->group($file['group'])
+                    ->isActiveWhen(fn (): bool => request()->routeIs("filament.{$panelId}.pages.{$file['slug']}"))
+                    ->sort(DocsPages::getNavigationSort())
+                    ->badge(DocsPages::getNavigationBadge(), color: DocsPages::getNavigationBadgeColor())
+                    ->url("{$file['slug']}");
+            });
+
+        return $navigationItems;
     }
 }
