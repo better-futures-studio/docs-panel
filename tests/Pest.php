@@ -1,5 +1,5 @@
 <?php
 
-use AbdelElrafa\DocsPanel\Tests\TestCase;
+use BetterFuturesStudio\DocsPanel\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,6 +1,6 @@
 <?php
 
-// config for AbdelElrafa/DocsPanel
+// config for BetterFuturesStudio/DocsPanel
 return [
 
 ];

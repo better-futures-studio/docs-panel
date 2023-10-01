@@ -1,8 +1,8 @@
 <?php
 
-namespace AbdelElrafa\DocsPanel;
+namespace BetterFuturesStudio\DocsPanel;
 
-use AbdelElrafa\DocsPanel\Pages\DocsPages;
+use BetterFuturesStudio\DocsPanel\Pages\DocsPages;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -63,7 +63,7 @@ class DocsPanelServiceProvider extends PackageServiceProvider
 
     protected function getAssetPackageName(): ?string
     {
-        return 'abdelelrafa/docs-panel';
+        return 'better-futures-studio/docs-panel';
     }
 
     public function panel(Panel $panel): Panel
@@ -110,12 +110,10 @@ class DocsPanelServiceProvider extends PackageServiceProvider
 
                             $navigationItems[] = NavigationItem::make($file['title'])
                                 ->group($group)
-                                ->icon(DocsPages::getNavigationIcon())
-                                ->activeIcon(DocsPages::getActiveNavigationIcon())
                                 ->isActiveWhen(fn (): bool => request()->routeIs("filament.{$panel}.pages.{$file['slug']}"))
                                 ->sort(DocsPages::getNavigationSort())
                                 ->badge(DocsPages::getNavigationBadge(), color: DocsPages::getNavigationBadgeColor())
-                                ->url("/{$routePath}");
+                                ->url("{$routePath}");
                         }
                         if (empty($navigationItems)) {
                             return;
@@ -129,12 +127,10 @@ class DocsPanelServiceProvider extends PackageServiceProvider
                 return $builder->groups($navigationGroups);
             });
 
+        $panel->renderHook('panels::topbar.end', fn () => self::$enableThemeSelector && ($panel->hasDarkMode() && ! $panel->hasDarkModeForced()) ? Blade::render('<x-filament-panels::theme-switcher />') : '');
+
         foreach (self::$modifyPanelUsing as $modifyPanelUsing) {
             $panel = $modifyPanelUsing($panel);
-        }
-
-        if (self::$enableThemeSelector && ($panel->hasDarkMode() && ! $panel->hasDarkModeForced())) {
-            $panel->renderHook('panels::topbar.end', fn () => Blade::render('<x-filament-panels::theme-switcher />'));
         }
 
         return $panel;

@@ -1,8 +1,8 @@
 <?php
 
-namespace AbdelElrafa\DocsPanel\Pages;
+namespace BetterFuturesStudio\DocsPanel\Pages;
 
-use AbdelElrafa\DocsPanel\DocsPanelServiceProvider;
+use BetterFuturesStudio\DocsPanel\DocsPanelServiceProvider;
 use Filament\Pages\Page;
 use Filament\Panel;
 use Illuminate\Contracts\Support\Htmlable;
@@ -14,8 +14,6 @@ use Symfony\Component\Finder\Finder;
 
 class DocsPages extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
     protected static string $view = 'docs-panel::docs-pages';
 
     protected static ?int $navigationSort = -2;
@@ -89,15 +87,9 @@ class DocsPages extends Page
 
                 $title = $object->matter('title');
                 if (empty($title)) {
-                    if (str_contains($file->getRelativePathname(), '/')) {
-                        if (str_contains($file->getRelativePathname(), 'index.md')) {
-                            $title = Str::of(str_replace(['index.md', '.md'], '', $file->getRelativePathname()))
-                                ->replace('/', ' ')
-                                ->title();
-                        } else {
-                            $title = str_replace(['.md'], '', $file->getRelativePathname());
-                        }
-                    }
+                    $title = Str::of(basename($file->getRelativePathname()))
+                        ->beforeLast('.md')
+                        ->headline();
                 }
 
                 $docs[] = [

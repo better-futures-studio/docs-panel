@@ -1,6 +1,6 @@
 <?php
 
-// translations for AbdelElrafa/DocsPanel
+// translations for BetterFuturesStudio/DocsPanel
 return [
     //
 ];
