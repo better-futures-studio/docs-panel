@@ -2,6 +2,14 @@
 
 All notable changes to `docs-panel` will be documented in this file.
 
+## 0.3.0 - 2023-10-01
+
+### What's Changed
+
+- Make the ordering of files PHP_INT_MAX by default. by @AbdelElrafa in https://github.com/better-futures-studio/docs-panel/pull/9
+
+**Full Changelog**: https://github.com/better-futures-studio/docs-panel/compare/0.2.0...0.3.0
+
 ## 0.2.0 - 2023-10-01
 
 Update the namespace.
