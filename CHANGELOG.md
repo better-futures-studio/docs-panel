@@ -2,6 +2,14 @@
 
 All notable changes to `docs-panel` will be documented in this file.
 
+## 0.4.0 - 2023-10-01
+
+### What's Changed
+
+- Refactor nav items to allow for route serialization. by @AbdelElrafa in https://github.com/better-futures-studio/docs-panel/pull/11
+
+**Full Changelog**: https://github.com/better-futures-studio/docs-panel/compare/0.3.0...0.4.0
+
 ## 0.3.0 - 2023-10-01
 
 ### What's Changed
