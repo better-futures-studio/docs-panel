@@ -2,6 +2,10 @@
 
 All notable changes to `docs-panel` will be documented in this file.
 
+## 0.2.0 - 2023-10-01
+
+Update the namespace.
+
 ## 0.1.0 - 2023-09-30
 
 ### What's Changed
