@@ -1,15 +1,15 @@
 {
-    "name": "abdelelrafa/docs-panel",
+    "name": "better-futures-studio/docs-panel",
     "description": "A Filament Panel for your applications public documentation.",
     "keywords": [
-        "abdelelrafa",
+        "better-futures-studio",
         "laravel",
         "docs-panel"
     ],
-    "homepage": "https://github.com/abdelelrafa/docs-panel",
+    "homepage": "https://github.com/better-futures-studio/docs-panel",
     "support": {
-        "issues": "https://github.com/abdelelrafa/docs-panel/issues",
-        "source": "https://github.com/abdelelrafa/docs-panel"
+        "issues": "https://github.com/better-futures-studio/docs-panel/issues",
+        "source": "https://github.com/better-futures-studio/docs-panel"
     },
     "license": "MIT",
     "authors": [
@@ -43,13 +43,13 @@
     },
     "autoload": {
         "psr-4": {
-            "AbdelElrafa\\DocsPanel\\": "src/",
-            "AbdelElrafa\\DocsPanel\\Database\\Factories\\": "database/factories/"
+            "BetterFuturesStudio\\DocsPanel\\": "src/",
+            "BetterFuturesStudio\\DocsPanel\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AbdelElrafa\\DocsPanel\\Tests\\": "tests/"
+            "BetterFuturesStudio\\DocsPanel\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -69,7 +69,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AbdelElrafa\\DocsPanel\\DocsPanelServiceProvider"
+                "BetterFuturesStudio\\DocsPanel\\DocsPanelServiceProvider"
             ]
         }
     },

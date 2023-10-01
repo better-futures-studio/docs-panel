@@ -1,8 +1,8 @@
 <?php
 
-namespace AbdelElrafa\DocsPanel;
+namespace BetterFuturesStudio\DocsPanel;
 
-use AbdelElrafa\DocsPanel\Pages\DocsPages;
+use BetterFuturesStudio\DocsPanel\Pages\DocsPages;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -63,7 +63,7 @@ class DocsPanelServiceProvider extends PackageServiceProvider
 
     protected function getAssetPackageName(): ?string
     {
-        return 'abdelelrafa/docs-panel';
+        return 'better-futures-studio/docs-panel';
     }
 
     public function panel(Panel $panel): Panel

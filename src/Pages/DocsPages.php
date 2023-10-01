@@ -1,8 +1,8 @@
 <?php
 
-namespace AbdelElrafa\DocsPanel\Pages;
+namespace BetterFuturesStudio\DocsPanel\Pages;
 
-use AbdelElrafa\DocsPanel\DocsPanelServiceProvider;
+use BetterFuturesStudio\DocsPanel\DocsPanelServiceProvider;
 use Filament\Pages\Page;
 use Filament\Panel;
 use Illuminate\Contracts\Support\Htmlable;

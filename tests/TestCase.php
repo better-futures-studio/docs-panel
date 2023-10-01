@@ -1,8 +1,8 @@
 <?php
 
-namespace AbdelElrafa\DocsPanel\Tests;
+namespace BetterFuturesStudio\DocsPanel\Tests;
 
-use AbdelElrafa\DocsPanel\DocsPanelServiceProvider;
+use BetterFuturesStudio\DocsPanel\DocsPanelServiceProvider;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'AbdelElrafa\\DocsPanel\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'BetterFuturesStudio\\DocsPanel\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

@@ -1,9 +1,9 @@
 # A Filament Panel for your applications public documentation.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/abdelelrafa/docs-panel.svg?style=flat-square)](https://packagist.org/packages/abdelelrafa/docs-panel)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/abdelelrafa/docs-panel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/abdelelrafa/docs-panel/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/abdelelrafa/docs-panel/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/AbdelElrafa/docs-panel/actions?query=branch%3Amain+workflow%3A%22Fix+PHP+Code+Styling%22)
-[![Total Downloads](https://img.shields.io/packagist/dt/abdelelrafa/docs-panel.svg?style=flat-square)](https://packagist.org/packages/abdelelrafa/docs-panel)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/better-futures-studio/docs-panel.svg?style=flat-square)](https://packagist.org/packages/better-futures-studio/docs-panel)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/better-futures-studio/docs-panel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/better-futures-studio/docs-panel/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/better-futures-studio/docs-panel/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/BetterFuturesStudio/docs-panel/actions?query=branch%3Amain+workflow%3A%22Fix+PHP+Code+Styling%22)
+[![Total Downloads](https://img.shields.io/packagist/dt/better-futures-studio/docs-panel.svg?style=flat-square)](https://packagist.org/packages/better-futures-studio/docs-panel)
 
 
 
@@ -14,7 +14,7 @@ Get Docs up and running for your app in seconds.
 You can install the package via composer:
 
 ```bash
-composer require abdelelrafa/docs-panel
+composer require better-futures-studio/docs-panel
 ```
 
 ## Documentation and Demo
