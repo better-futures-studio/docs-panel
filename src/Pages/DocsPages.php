@@ -14,8 +14,6 @@ use Symfony\Component\Finder\Finder;
 
 class DocsPages extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
     protected static string $view = 'docs-panel::docs-pages';
 
     protected static ?int $navigationSort = -2;
@@ -89,15 +87,9 @@ class DocsPages extends Page
 
                 $title = $object->matter('title');
                 if (empty($title)) {
-                    if (str_contains($file->getRelativePathname(), '/')) {
-                        if (str_contains($file->getRelativePathname(), 'index.md')) {
-                            $title = Str::of(str_replace(['index.md', '.md'], '', $file->getRelativePathname()))
-                                ->replace('/', ' ')
-                                ->title();
-                        } else {
-                            $title = str_replace(['.md'], '', $file->getRelativePathname());
-                        }
-                    }
+                    $title = Str::of(basename($file->getRelativePathname()))
+                        ->beforeLast('.md')
+                        ->headline();
                 }
 
                 $docs[] = [
@@ -114,7 +106,7 @@ class DocsPages extends Page
         });
     }
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         $panelName = DocsPanelServiceProvider::$name;
         foreach (static::getDocs() as $file) {

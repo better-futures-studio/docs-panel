@@ -17,26 +17,8 @@ You can install the package via composer:
 composer require abdelelrafa/docs-panel
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="docs-panel-views"
-```
-
-## Usage
-
-Simply put .md files in your `resources/docs` directory and you're good to go.
-
-You can control the title, slug, group and order of your docs by adding a front matter to the top of your .md files. They are optional and have sensible defaults.
-
-```MD
----
-title: Artisan Console
-slug: artisan
-group: Digging Deeper
-order: 1
----
-```
+## Documentation and Demo
+<a href="https://docs.larafa.st" target="_blank">View the documentation and demo.</a>
 
 ## Testing
 

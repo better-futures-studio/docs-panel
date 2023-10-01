@@ -4,6 +4,10 @@
             scroll-padding-top: 5rem;
         }
 
+        .fi-page {
+            padding-left: 16px;
+        }
+
         .docs_main a h2:before,
         .docs_main a h3:before,
         .docs_main a h4:before {
