@@ -2,6 +2,14 @@
 
 All notable changes to `docs-panel` will be documented in this file.
 
+## 0.6.0 - 2023-10-01
+
+### What's Changed
+
+- Sensible version constraints by @smpita in https://github.com/better-futures-studio/docs-panel/pull/13
+
+**Full Changelog**: https://github.com/better-futures-studio/docs-panel/compare/0.5.0...0.6.0
+
 ## 0.5.0 - 2023-10-01
 
 ### What's Changed
