@@ -2,6 +2,14 @@
 
 All notable changes to `docs-panel` will be documented in this file.
 
+## 0.5.0 - 2023-10-01
+
+### What's Changed
+
+- Fix groups collapse. by @AbdelElrafa in https://github.com/better-futures-studio/docs-panel/pull/12
+
+**Full Changelog**: https://github.com/better-futures-studio/docs-panel/compare/0.4.0...0.5.0
+
 ## 0.4.0 - 2023-10-01
 
 ### What's Changed
