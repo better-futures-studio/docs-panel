@@ -136,7 +136,7 @@ class DocsPages extends Page
 
         $navigationGroups = [];
         foreach ($docs as $doc) {
-            $navigationGroups[strval($doc['group'])] = $navigationGroups[strval($doc['group'])] ?? request()->routeIs("filament.{$panelId}.pages.{$doc['slug']}");
+            $navigationGroups[strval($doc['group'])] = ($navigationGroups[strval($doc['group'])] ?? false) ?: request()->routeIs("filament.{$panelId}.pages.{$doc['slug']}");
         }
         $navigationGroups = collect($navigationGroups)
             ->sortKeys()
