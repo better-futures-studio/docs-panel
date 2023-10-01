@@ -116,7 +116,7 @@ class DocsPages extends Page
         });
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string | Htmlable
     {
         $panelName = DocsPanelServiceProvider::$name;
         foreach (static::getDocs() as $file) {
