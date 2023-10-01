@@ -96,7 +96,7 @@ class DocsPages extends Page
                     'path' => $file->getRelativePathname(),
                     'slug' => $object->matter('slug') ?: Str::of($file->getRelativePathname())->replace(['index.md', '.md'], '')->afterLast(DIRECTORY_SEPARATOR) ?: 'index',
                     'group' => $object->matter('group') ?: (Str::contains($file->getRelativePathname(), '/') ? Str::of($file->getRelativePathname())->before('/')->headline() : ''),
-                    'order' => $object->matter('order') ?: 0,
+                    'order' => $object->matter('order') ?: PHP_INT_MAX,
                     'title' => $title ?: 'Get Started',
                     'content' => $object->body(),
                 ];
